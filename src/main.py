@@ -4,14 +4,18 @@ from fastapi.templating import Jinja2Templates
 from fastapi.staticfiles import StaticFiles
 from fastapi.requests import Request
 
+import uvicorn
+
+from core.config import settings
+
+from api import router as api_router
+
 app = FastAPI()
 
-app.mount("/static", StaticFiles(directory="static"), name="static")
+app.include_router(api_router, prefix=settings.api.prefix)
 
-templates = Jinja2Templates(directory="templates")
-
-@app.get("/", response_class=HTMLResponse)
-async def start(request: Request):
-    return templates.TemplateResponse(
-        request=request, name="index.html"
-    )
+if __name__ == "__main__":
+    uvicorn.run("main:app", 
+                host=settings.run.host,
+                port=settings.run.port,
+                reload=True)
