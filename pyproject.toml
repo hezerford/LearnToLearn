@@ -13,6 +13,7 @@ pydantic = "^2.8.2"
 pydantic-settings = "^2.4.0"
 python-decouple = "^3.8"
 sqlalchemy = {extras = ["asyncio"], version = "^2.0.31"}
+asyncpg = "^0.29.0"
 
 
 [build-system]
