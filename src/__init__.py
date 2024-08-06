@@ -1,4 +1,4 @@
-from src.models import Base
+from core.models import Base
 
 __all__ = [
     "Base",
