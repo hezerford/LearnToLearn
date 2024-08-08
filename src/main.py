@@ -1,21 +1,35 @@
+from contextlib import asynccontextmanager
+import logging
 from fastapi import FastAPI
-from fastapi.responses import HTMLResponse
-from fastapi.templating import Jinja2Templates
-from fastapi.staticfiles import StaticFiles
-from fastapi.requests import Request
 
 import uvicorn
 
-from core.config import settings
+from config import settings
+
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
+
+logger.info(f"Info DB: {settings.db.url}")
+
+from src.database import db_helper
 
 from api import router as api_router
 
-app = FastAPI()
+@asynccontextmanager
+async def lifespan():
+    # startup
+    yield
+    # shutdown
+    await db_helper.dispose()
 
-app.include_router(api_router, prefix=settings.api.prefix)
+main_app = FastAPI(
+    lifespan=lifespan,
+)
+
+main_app.include_router(api_router, prefix=settings.api.prefix)
 
 if __name__ == "__main__":
-    uvicorn.run("main:app", 
+    uvicorn.run("main:main_app", 
                 host=settings.run.host,
                 port=settings.run.port,
                 reload=True)
