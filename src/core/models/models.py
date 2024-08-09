@@ -1,12 +1,15 @@
-# from sqlalchemy import MetaData, Column, ForeignKey, Integer, String, Boolean, Table
-# from sqlalchemy.orm import relationship
+from sqlalchemy import MetaData, Column, ForeignKey, Integer, String, Boolean, Table
+from sqlalchemy.orm import relationship, Mapped, mapped_column
+
+from .base import Base
 
 # metadata = MetaData()
 
 # class User(Base):
-#     __tablename__ = "users"
+#     __tablename__ = "users" 
+    
+#     username: Mapped[str] = mapped_column(unique=True)
 
-#     id = Column(Integer, primary_key=True, index=True)
 #     username = Column(String, unique=True, index=True)
 
 #     progress = relationship("UserProgress", back_populates="user")
