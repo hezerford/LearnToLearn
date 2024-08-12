@@ -1,24 +1,36 @@
+version: '3.9'
+
 services:
+    app:
+      build:
+        context: .
+      ports:
+        - "8080:8080"
+      volumes:
+        - .:/src
+      environment:
+        DATABASE_URL: ${APP_CONFIG__DB__URL}
+      depends_on:
+        - db
 
-  db: 
-    image: postgres
-    environment:
-      POSTGRES_DB: EngToRusDB
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: qwefghm,.
-    ports:
-      - "5432:5432"
+    db:
+      image: postgres:latest
+      env_file:
+        - .env
+      environment:
+        POSTGRES_USER: ${POSTGRES_USER}
+        POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+        POSTGRES_DB: ${POSTGRES_DB}
+      ports:
+        - "5432:5432"
 
-  adminer:
-    image: adminer
-    ports: 
-      - "8080:8080"
-
-  pgadmin:
-    image: dpage/pgadmin4
-    environment:
-      PGADMIN_DEFAULT_EMAIL: admin@admin.org
-      PGADMIN_DEFAULT_PASSWORD: admin
-      PGADMIN_CONFIG_SERVER_MODE: 'False'
-    ports:
-      - "5050:80"
+    pgadmin:
+      image: dpage/pgadmin4
+      environment:
+        PGADMIN_DEFAULT_EMAIL: va.baklanov@mail.ru
+        PGADMIN_DEFAULT_PASSWORD: zxcqweasd
+        PGADMIN_CONFIG_SERVER_MODE: 'False'
+      ports:
+        - "8081:80"
+      depends_on:
+        - db
