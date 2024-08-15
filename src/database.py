@@ -39,12 +39,3 @@ db_helper = DatabaseHelper(
     pool_size=settings.db.pool_size,
     max_overflow=settings.db.max_overflow,
 )
-
-# SQLALCHEMY_DATABASE_URL = config("DB_URL")
-
-# engine = create_engine(
-#     SQLALCHEMY_DATABASE_URL
-# )
-# SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
-
-# Base = declarative_base()
