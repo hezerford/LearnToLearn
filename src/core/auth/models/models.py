@@ -5,11 +5,12 @@ from sqlalchemy.orm import relationship, Mapped, mapped_column
 
 from src.core.models.base import Base
 from src.core.models.mixins.int_id_pk import IntIdPkMixin
+from src.utils.user_id import UserIdType
 
 if TYPE_CHECKING:
     from sqlalchemy.ext.asyncio import AsyncSession
 
-class User(IntIdPkMixin, SQLAlchemyBaseUserTable[int], Base):
+class User(IntIdPkMixin, SQLAlchemyBaseUserTable[UserIdType], Base):
     username: Mapped[str] = mapped_column(unique=True)
 
     @classmethod
