@@ -10,7 +10,7 @@ from src.utils.user_id import UserIdType
 if TYPE_CHECKING:
     from sqlalchemy.ext.asyncio import AsyncSession
 
-class User(IntIdPkMixin, SQLAlchemyBaseUserTable[UserIdType], Base):
+class User(Base, IntIdPkMixin, SQLAlchemyBaseUserTable[UserIdType]):
     username: Mapped[str] = mapped_column(unique=True)
 
     @classmethod
