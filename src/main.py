@@ -7,7 +7,7 @@ from src.api import router as api_router
 
 main_app = create_app()
 
-main_app.include_router(api_router, prefix=settings.api.prefix)
+main_app.include_router(api_router)
 
 if __name__ == "__main__":
     uvicorn.run("src.main:main_app", 
