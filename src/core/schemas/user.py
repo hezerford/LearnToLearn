@@ -1,11 +1,9 @@
-import uuid
-
 from fastapi_users import schemas
 
 from src.utils.user_id import UserIdType
 
 
-class UserRead(UserIdType):
+class UserRead(schemas.BaseUser[UserIdType]):
     pass
 
 
