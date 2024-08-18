@@ -7,7 +7,7 @@ from .access_tokens import get_access_tokens_db
 from fastapi_users.authentication.strategy.db import DatabaseStrategy
 
 if TYPE_CHECKING:
-    from src.core.auth.models import AccessToken
+    from src.core.models import AccessToken
     from fastapi_users.authentication.strategy.db import AccessTokenDatabase
 
 

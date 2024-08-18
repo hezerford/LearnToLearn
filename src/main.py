@@ -1,6 +1,3 @@
-from fastapi import FastAPI
-
-from fastapi.responses import ORJSONResponse
 import uvicorn
 
 from src.create_fastapi_app import create_app

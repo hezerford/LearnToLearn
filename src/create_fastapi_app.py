@@ -1,5 +1,5 @@
 from contextlib import asynccontextmanager
-from src.database import db_helper
+from src.core.models.database import db_helper
 from fastapi.responses import ORJSONResponse
 from fastapi import FastAPI
 

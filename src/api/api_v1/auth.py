@@ -2,7 +2,7 @@ from fastapi import APIRouter
 
 from .fastapi_users import fastapi_users
 from src.api.dependencies.authentication.backend import authentication_backend
-from core.config import settings
+from src.core.config import settings
 
 router = APIRouter(
     prefix=settings.api.v1.auth,

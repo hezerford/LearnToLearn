@@ -1,6 +1,7 @@
-from src.core.config import settings
-
+from typing import AsyncGenerator
 from sqlalchemy.ext.asyncio import create_async_engine, async_sessionmaker, AsyncSession, AsyncEngine
+
+from src.core.config import settings
 
 class DatabaseHelper:
     def __init__(
@@ -28,9 +29,10 @@ class DatabaseHelper:
     async def dispose(self) -> None:
         await self.engine.dispose()
 
-    async def session_getter(self):
+    async def session_getter(self) -> AsyncGenerator[AsyncSession, None]:
         async with self.session_factory() as session:
             yield session
+
 
 db_helper = DatabaseHelper(
     url=str(settings.db.url),
